@@ -46,38 +46,6 @@ router.post('/login', validateLogin, (req, res) => {
     })
 });
 
-
-// GET POSTS FOR CHEF
-router.get('/:id/posts', authenticate, validateChefId, (req, res) => {
-    const id = req.params.id;
-
-    Chefs.getChefPosts(id)
-    .then(posts => {
-        res.status(200).json(posts);
-    })
-    .catch(error => {
-        res.status(500).json({ errorMessage: 'Failed to get posts' })
-    })
-});
-
-
-// ADD POST FOR CHEF
-router.post('/:id/posts', authenticate, validateChefId, validatePost, (req, res) => {
-    const id = req.params.id;
-    req.body.chef_id = id;
-    const postData = req.body;
-
-    Chefs.addPost(postData)
-    .then(post => {
-        res.status(201).json(post);
-    })
-    .catch(error => {
-        res.status(500).json({ errorMessage: 'Failed to add post' })
-    })
-})
-
-
-
 // ---------- Function for creating and signing token ----------- //
 
 function signToken(user) {
@@ -85,7 +53,7 @@ function signToken(user) {
       username: user.username
     };
   
-    const secret = process.env.JWT_SECRET || "super secret code";
+    const secret = process.env.JWT_SECRET || "secret here";
   
     const options = {
       expiresIn: "1h",
@@ -125,40 +93,6 @@ function validateLogin(req, res, next) {
         res.status(400).json({ error: 'missing required username' })
     } else if (!data.password) {
         res.status(400).json({ error: 'missing required password' })
-    } else {
-        next();
-    }
-}
-
-function validateChefId(req, res, next) {
-    const id = req.params.id;
-      Chefs.getChefById(id) 
-      .then(chef => {
-          if (chef) {
-              req.chef = chef;
-              next();
-          } else {
-              res.status(404).json({ message: 'invalid chef id' })
-          }
-      })
-      .catch(error => {
-            res.status(500).json({ error: 'The chef information could not be retrieved.' })
-      })   
-}
-
-
-function validatePost(req, res, next) {
-    const data = req.body;
-    if (!data) {
-        res.status(400).json({ error: 'missing data' })
-    } else if (!data.title) {
-        res.status(400).json({ error: 'missing required title' })
-    } else if (!data.meal_type) {
-        res.status(400).json({ error: 'missing required meal type' })
-    } else if (!data.ingredients) {
-        res.status(400).json({ error: 'missing required ingredients' })
-    } else if (!data.instructions) {
-        res.status(400).json({ error: 'missing required instructions' })
     } else {
         next();
     }
