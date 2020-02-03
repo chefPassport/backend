@@ -1,4 +1,5 @@
 const express = require('express');
+const authenticate = require('../auth/authenticate-middleware');
 
 const Recipes = require('./recipes-model.js');
 
@@ -153,7 +154,7 @@ router.get('/:id', (req, res) =>{
 */
 
 // POST (create) new recipe /api/recipes
-router.post('/', (req, res) => {
+router.post('/', authenticate, (req, res) => {
     let newRecipe = req.body;
 
     Recipes.addRecipe(newRecipe)
