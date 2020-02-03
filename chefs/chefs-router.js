@@ -48,6 +48,46 @@ router.post('/login', validateLogin, (req, res) => {
     })
 });
 
+
+/**
+ * @api {get} /api/chefs/:id/recipes Get specific Chef's recipes
+ * @apiName GetSpecificChefsRecipes
+ * @apiGroup Chefs
+ * 
+ * @apiParam {Number} id Chef id
+ * 
+ * @apiSuccess {Number} id Recipe id
+ * @apiSuccess {string} recipe_title Recipe Title
+ * @apiSuccess {string} image Recipe Img
+ * @apiSuccess {string} ingredients Recipe Ingredients
+ * @apiSuccess {string} instructions Recipe Instructions
+ * @apiSuccess {string} meal_type Recipe Meal Type
+ * @apiSuccess {Number} chef_id Chef's Id
+ * 
+ * @apiSuccessExample Successful Response:
+ * HTTP/1.1 200 OK
+ * [
+ *   {
+ *       "id": 1,
+ *       "recipe_title": "PB&J Sandwich",
+ *       "image": "https://images.unsplash.com/photo-1557275357-072087771588?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2850&q=80",
+ *       "ingredients": "tbsp of peanut butter, tbsp of jelly, and 2 slices of bread",
+ *       "instructions": "Spread peanut butter on one slice of bread. Spread jelly on other. Combine and bam!",
+ *       "meal_type": "Snack",
+ *       "chef_id": 1
+ *   },
+ *   {
+ *       "id": 2,
+ *       "recipe_title": "Scrambled eggs",
+ *       "image": "https://images.unsplash.com/photo-1551185618-5d8656fd00b1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2978&q=80",
+ *       "ingredients": "2 eggs, black pepper, and salt",
+ *       "instructions": "Heat pan. Lightly coat pan with non-stick cooking spray. Beat eggs in bowl. Add a pinch of salt and pepper to taste. Add eggs to pan and stir. Heat until cooked. Enjoy.",
+ *       "meal_type": "Breakfast",
+ *        "chef_id": 1
+ *   }
+ * ]
+ * */
+
 // GET specific Chef's recipe /api/chefs/:id/recipes
 router.get('/:id/recipes', (req, res) => {
     const { id } = req.params;
