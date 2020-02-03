@@ -11,6 +11,7 @@ server.use(helmet());
 server.use(cors());
 server.use(express.json());
 
+server.use('/docs', express.static('./docs'));
 server.use('/api/recipes', recipeRouter);
 server.use('/api/chefs', chefRouter);
 

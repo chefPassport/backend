@@ -1,0 +1,651 @@
+[
+  {
+    "type": "get",
+    "url": "/api/chefs/:id/recipes",
+    "title": "Get specific Chef's recipes",
+    "name": "GetSpecificChefsRecipes",
+    "group": "Chefs",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Chef id</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Recipe id</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "recipe_title",
+            "description": "<p>Recipe Title</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "image",
+            "description": "<p>Recipe Img</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "ingredients",
+            "description": "<p>Recipe Ingredients</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "instructions",
+            "description": "<p>Recipe Instructions</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "meal_type",
+            "description": "<p>Recipe Meal Type</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "chef_id",
+            "description": "<p>Chef's Id</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Successful Response:",
+          "content": "HTTP/1.1 200 OK\n[\n  {\n      \"id\": 1,\n      \"recipe_title\": \"PB&J Sandwich\",\n      \"image\": \"https://images.unsplash.com/photo-1557275357-072087771588?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2850&q=80\",\n      \"ingredients\": \"tbsp of peanut butter, tbsp of jelly, and 2 slices of bread\",\n      \"instructions\": \"Spread peanut butter on one slice of bread. Spread jelly on other. Combine and bam!\",\n      \"meal_type\": \"Snack\",\n      \"chef_id\": 1\n  },\n  {\n      \"id\": 2,\n      \"recipe_title\": \"Scrambled eggs\",\n      \"image\": \"https://images.unsplash.com/photo-1551185618-5d8656fd00b1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2978&q=80\",\n      \"ingredients\": \"2 eggs, black pepper, and salt\",\n      \"instructions\": \"Heat pan. Lightly coat pan with non-stick cooking spray. Beat eggs in bowl. Add a pinch of salt and pepper to taste. Add eggs to pan and stir. Heat until cooked. Enjoy.\",\n      \"meal_type\": \"Breakfast\",\n       \"chef_id\": 1\n  }\n]",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./chefs/chefs-router.js",
+    "groupTitle": "Chefs"
+  },
+  {
+    "type": "post",
+    "url": "/api/chefs/login",
+    "title": "Login User",
+    "name": "LoginUser",
+    "group": "Chefs",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "username",
+            "description": "<p>Chef username</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "password",
+            "description": "<p>Chef password</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "SuccessMessage",
+            "description": "<p>user logged in success message</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "token",
+            "description": "<p>JSON Web Token</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "integer",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Chef id</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Successful Response:",
+          "content": "HTTP/1.1 200 OK\n{\n    \"message\": \"bgingrichtest Logged In!\",\n    \"token\": \"asdfasdfasdfasdf.eyJ1c2VybmFtZSI6ImJnaW5ncmljaHRlc3QiLCJpYXQiOjE1ODA3NTQxMzIsImV4cCI6MTU4MDc4MjkzMn0.XVst-ijFdUzZGXhfZOYnjRvK-JHHXzOPA9_zOzpG1J0\",\n    \"id\": 1\n  }",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./chefs/chefs-router.js",
+    "groupTitle": "Chefs"
+  },
+  {
+    "type": "post",
+    "url": "/api/chefs/register",
+    "title": "Register User",
+    "name": "RegisterUser",
+    "group": "Chefs",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": "<p>Chef name</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "username",
+            "description": "<p>Chef username</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "password",
+            "description": "<p>Chef password</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "location",
+            "description": "<p>Chef location</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "contact_info",
+            "description": "<p>Chef contact info</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "integer",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Chef id</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": "<p>Chef name</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "username",
+            "description": "<p>Chef username</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "password",
+            "description": "<p>Chef password</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "location",
+            "description": "<p>Chef location</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "contact_info",
+            "description": "<p>Chef contact info</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Successful Response:",
+          "content": "HTTP/1.1 201 Created\n{\n    \"id\": 1,\n    \"name\": \"Bob Smith\",\n    \"username\": \"bgingrichtest\",\n    \"password\": \"password1234\",\n    \"location\": \"Pittsburgh, PA\",\n    \"contact_info\": \"bgingrichchef@gmail.com\"\n  }",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./chefs/chefs-router.js",
+    "groupTitle": "Chefs"
+  },
+  {
+    "type": "post",
+    "url": "/api/recipes",
+    "title": "Create/Post new recipe",
+    "name": "CreateRecipe",
+    "group": "Recipes",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "recipe_title",
+            "description": "<p>Recipe Title</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "image",
+            "description": "<p>Recipe Img</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "ingredients",
+            "description": "<p>Recipe Ingredients</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "instructions",
+            "description": "<p>Recipe Instructions</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "meal_type",
+            "description": "<p>Recipe Meal Type</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "chef_id",
+            "description": "<p>Chef's Id</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Example Body:",
+          "content": "{\n\t \"recipe_title\": \"Chocolate Milk 2.0\",\n\t \"image\": \"https://images.unsplash.com/photo-1554654402-d506f91a1a64?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80\",\n\t \"ingredients\": \"Chocolate syrup, 1 cup of milk\",\n\t \"instructions\": \"Mix chocolate syrup with cold milk and stir\",\n\t \"meal_type\": \"Snack\",\n\t \"chef_id\": 2\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Successful Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  \"message\": \"New Recipe Added!\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./recipes/recipes-router.js",
+    "groupTitle": "Recipes"
+  },
+  {
+    "type": "delete",
+    "url": "/api/chefs/:id/recipes/:id",
+    "title": "Delete Recipe",
+    "name": "DeleteRecipe",
+    "group": "Recipes",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Integer",
+            "optional": false,
+            "field": "recipe_id",
+            "description": "<p>Recipe id</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Recipe deleted</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Successful Response:",
+          "content": "HTTP/1.1 200 OK\n{\n    \"message\": \"Deleted recipe\"\n  }",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./chefs/chefs-router.js",
+    "groupTitle": "Recipes"
+  },
+  {
+    "type": "get",
+    "url": "/api/recipes",
+    "title": "Get all recipes",
+    "name": "GetRecipes",
+    "group": "Recipes",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Recipe id</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "recipe_title",
+            "description": "<p>Recipe Title</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "image",
+            "description": "<p>Recipe Img</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "ingredients",
+            "description": "<p>Recipe Ingredients</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "instructions",
+            "description": "<p>Recipe Instructions</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "meal_type",
+            "description": "<p>Recipe Meal Type</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "chef_id",
+            "description": "<p>Chef's Id</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Successful Response:",
+          "content": "HTTP/1.1 200 OK\n[\n {\n      \"id\": 1,\n       \"recipe_title\": \"PB&J Sandwich\",\n       \"image\": \"https://images.unsplash.com/photo-1557275357-072087771588?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2850&q=80\",\n       \"ingredients\": \"tbsp of peanut butter, tbsp of jelly, and 2 slices of bread\",\n       \"instructions\": \"Spread peanut butter on one slice of bread. Spread jelly on other. Combine and bam!\",\n       \"meal_type\": \"Snack\",\n       \"chef_id\": 1\n   },\n   {\n       \"id\": 2,\n       \"recipe_title\": \"Scrambled eggs\",\n       \"image\": \"https://images.unsplash.com/photo-1551185618-5d8656fd00b1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2978&q=80\",\n       \"ingredients\": \"2 eggs, black pepper, and salt\",\n       \"instructions\": \"Heat pan. Lightly coat pan with non-stick cooking spray. Beat eggs in bowl. Add a pinch of salt and pepper to taste. Add eggs to pan and stir. Heat until cooked. Enjoy.\",\n       \"meal_type\": \"Breakfast\",\n       \"chef_id\": 1\n   },\n]",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./recipes/recipes-router.js",
+    "groupTitle": "Recipes"
+  },
+  {
+    "type": "get",
+    "url": "/api/recipes/:id",
+    "title": "Get specific recipe",
+    "name": "GetSpecificRecipe",
+    "group": "Recipes",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Recipe id</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Recipe id</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "recipe_title",
+            "description": "<p>Recipe Title</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "image",
+            "description": "<p>Recipe Img</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "ingredients",
+            "description": "<p>Recipe Ingredients</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "instructions",
+            "description": "<p>Recipe Instructions</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "meal_type",
+            "description": "<p>Recipe Meal Type</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "chef_id",
+            "description": "<p>Chef's Id</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "object",
+            "optional": false,
+            "field": "chef",
+            "description": "<p>Chef Info</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Successful Response:",
+          "content": "HTTP/1.1 200 OK\n{\n    \"id\": 1,\n    \"recipe_title\": \"PB&J Sandwich\",\n    \"image\": \"https://images.unsplash.com/photo-1557275357-072087771588?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2850&q=80\",\n    \"ingredients\": \"tbsp of peanut butter, tbsp of jelly, and 2 slices of bread\",\n    \"instructions\": \"Spread peanut butter on one slice of bread. Spread jelly on other. Combine and bam!\",\n    \"meal_type\": \"Snack\",\n    \"chef_id\": 1,\n    \"chef\": {\n           \"id\": 1,\n           \"name\": \"Jim Smith\",\n           \"username\": \"user1\",\n           \"password\": \"user1test123\",\n           \"location\": \"Pittsburgh, PA\",\n           \"contact_info\": \"jsmithchef@gmail.com\"\n           }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./recipes/recipes-router.js",
+    "groupTitle": "Recipes"
+  },
+  {
+    "type": "put",
+    "url": "/api/chefs/:id/recipes/:id",
+    "title": "Update Recipe",
+    "name": "UpdateRecipe",
+    "group": "Recipes",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "recipe_title",
+            "description": "<p>Recipe title</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "image",
+            "description": "<p>Recipe image URL</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "ingredients",
+            "description": "<p>Recipe ingredients</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "instructions",
+            "description": "<p>Recipe instructions</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "meal_type",
+            "description": "<p>Recipe meal type</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "chef_id",
+            "description": "<p>Recipe chef id</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "recipe_title",
+            "description": "<p>Recipe title</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "image",
+            "description": "<p>Recipe image URL</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "ingredients",
+            "description": "<p>Recipe ingredients</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "instructions",
+            "description": "<p>Recipe instructions</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "meal_type",
+            "description": "<p>Recipe meal type</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "chef_id",
+            "description": "<p>Recipe chef id</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Successful Response:",
+          "content": "HTTP/1.1 200 OK\n{\n    \"recipe_title\": \"Lobster Bisque\",\n    \"image\": \"images.google.com/12345\",\n    \"ingredients\": \"butter, lobster, broth, salt, pepper\",\n    \"instructions\": \"Mix all ingredients together in pot on medium heat\",\n    \"meal_type\": \"Dinner\",\n    \"chef_id\": 1\n  }",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./chefs/chefs-router.js",
+    "groupTitle": "Recipes"
+  }
+]
