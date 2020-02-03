@@ -7,6 +7,7 @@ const router = express.Router();
 
 
 const Chefs = require('./chefs-model');
+const Recipes = require('../recipes/recipes-model.js');
 
 
 // REGISTER/LOGIN
@@ -46,6 +47,23 @@ router.post('/login', validateLogin, (req, res) => {
         res.status(500).json({ errorMessage: 'Failed to retrieve credentials '});
     })
 });
+
+// GET specific Chef's recipe /api/chefs/:id/recipes
+router.get('/:id/recipes', (req, res) => {
+    const { id } = req.params;
+
+    Recipes.findRecipesByChefId(id)
+    .then(recipes => {
+        if(recipes){
+            res.json(recipes)
+        } else {
+            res.status(404).json({ error: 'Could not find recipes with provided ID'})
+        }
+    })
+    .catch(error => {
+        res.status(500).json(error);
+    })
+})
 
 // ---------- Function for creating and signing token ----------- //
 

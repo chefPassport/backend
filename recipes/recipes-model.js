@@ -7,7 +7,8 @@ module.exports = {
     addRecipe,
     updateRecipe,
     removeRecipe,
-    findRecipesByChefId
+    findRecipesByChefId,
+    getChefsById
 };
 
 function findRecipes(){
@@ -15,8 +16,15 @@ function findRecipes(){
 }
 
 function findRecipesById(id){
-    return db('recipes').where({ id }).first();
+    return db('recipes as r')
+    .where({ id })
+    .first();
 }
+
+function getChefsById(id) {
+    return db("chefs").where({ id }).first();
+  }
+
 
 function findBy(filter){
     return db('recipes').where(filter)
@@ -43,6 +51,6 @@ function removeRecipe(id){
 }
 
 function findRecipesByChefId(id){
-    return db('recipes')
-    .where('chef_id', id);
+    return db('recipes as r')
+    .where('r.chef_id', id);
 }
