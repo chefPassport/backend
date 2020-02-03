@@ -45,8 +45,4 @@ router.post('/', (req, res) => {
 
 // ??? GET specific Chef's recipe /api/chef/:id/recipes
 
-// PUT (Edit) specific recipe /api/chef/:id/recipes/:id
-
-// DELETE specific recipe /api/chef/:id/recipes/:id
-
 module.exports = router;
