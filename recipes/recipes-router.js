@@ -134,6 +134,16 @@ router.get('/:id', (req, res) =>{
  * @apiParam {string} meal_type Recipe Meal Type
  * @apiParam {Number} chef_id Chef's Id
  * 
+ * @apiParamExample Example Body:
+ * {
+ *	 "recipe_title": "Chocolate Milk 2.0",
+ *	 "image": "https://images.unsplash.com/photo-1554654402-d506f91a1a64?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80",
+ *	 "ingredients": "Chocolate syrup, 1 cup of milk",
+ *	 "instructions": "Mix chocolate syrup with cold milk and stir",
+ *	 "meal_type": "Snack",
+ *	 "chef_id": 2
+ * }
+ * 
  * @apiSuccessExample Successful Response:
  * HTTP/1.1 200 OK
  * {
