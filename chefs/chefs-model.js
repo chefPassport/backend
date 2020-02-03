@@ -4,10 +4,10 @@ module.exports = {
     add,
     findBy,
     getChefById,
-    getChefPosts,
-    addPost
+    getChefRecipes,
+    update,
+    remove
 }
-
 
 function add(chef) {
     return db('chefs')
@@ -32,21 +32,44 @@ function getChefById(id) {
         .first();
 }
 
-function getChefPosts(id) {
-    return db('posts as p')
-        .select('p.id', 'p.image_url', 'p.title', 'p.meal_type', 'p.ingredients', 'p.instructions', 'p.chef_id', 'c.name', 'c.location', 'c.contact_info')
-        .join('chefs as c', 'p.chef_id', '=', 'c.id')
-        .where('p.chef_id', id);
+function getPostByIdAllInfo(id) {
+    return db('recipes')
+    .where({ id })
+    .first();
 }
 
-function addPost(post) {
-    return db('posts')
-        .insert(post, 'id')
-        .then(ids => {
-            const [id] = ids;
+function getChefRecipes(id) {
+    return db('recipes as r')
+        .select('r.id', 'r.image', 'r.recipe_title', 'r.meal_type', 'r.ingredients', 'r.instructions', 'r.chef_id', 'c.name', 'c.location', 'c.contact_info')
+        .join('chefs as c', 'r.chef_id', '=', 'c.id')
+        .where('r.chef_id', id);
+}
 
-            return db('posts')
-                .where({ id })
-                .first();
+function update(id, changes) {
+    return db('recipes')
+        .where('id', id)
+        .update(changes)
+        .then(count => {
+            if (count > 0) {
+                return getPostByIdAllInfo(id);
+            }
         })
+}
+
+function remove(id) {
+    let deletedRecipe = {};
+    db('recipes')
+    .where({ id })
+    .first()
+    .then(recipe => {
+        deletedRecipe = recipe; 
+    });
+    return db('recipes')
+        .where('id', id)
+        .del()
+        .then(count => {
+            if (count > 0) {
+                return deletedRecipe;
+            }
+        });
 }
