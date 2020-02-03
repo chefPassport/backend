@@ -6,12 +6,12 @@ exports.up = function(knex) {
     
     recipes.string('recipe_title', 128).notNullable();
     recipes.string('image').notNullable();
-    recipes.string('ingredients').notNullable();
-    recipes.string('instructions').notNullable();
-    recipes.string('meal_type').notNullable()
+    recipes.text('ingredients').notNullable();
+    recipes.text('instructions').notNullable();
+    recipes.integer('meal_type_id').notNullable()
         .unsigned()
         .references('id')
-        .inTable('recipes')
+        .inTable('meal_type')
         .onDelete('CASCADE')
         .onUpdate('CASCADE');
     recipes.integer('chef_id').notNullable()
@@ -23,10 +23,12 @@ exports.up = function(knex) {
   })
   .createTable('meal_type', mealtypes => {
     mealtypes.increments();
-    recipes.string('meal_type_name', 128).notNullable();
+    mealtypes.string('meal_type_name', 128).notNullable();
     });
 };
 
 exports.down = function(knex) {
-  return knex.schema.dropTableIfExists('recipes');
+  return knex.schema
+  .dropTableIfExists('meal_type')
+  .dropTableIfExists('recipes');
 };
