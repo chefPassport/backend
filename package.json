@@ -6,8 +6,11 @@
   "scripts": {
     "server": "nodemon index.js",
     "start": "node index.js",
-    "test": "jest --watch",
+    "test": "cross-env DB_ENV=testing jest --watch",
     "docs": "apidoc -i ./api/server -e node_modules -o ./docs"
+  },
+  "jest": {
+    "testEnvironment": "node"
   },
   "repository": {
     "type": "git",
@@ -26,11 +29,15 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "helmet": "^3.21.2",
+    "jest": "^25.1.0",
     "jsonwebtoken": "^8.5.1",
     "knex": "^0.20.8",
     "knex-cleaner": "^1.3.0",
     "nodemon": "^2.0.2",
     "sqlite3": "^4.1.1",
     "supertest": "^4.0.2"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.0"
   }
 }
