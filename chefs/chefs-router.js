@@ -141,7 +141,7 @@ router.post('/login', validateLogin, (req, res) => {
 router.get('/:id/recipes', (req, res) => {
     const { id } = req.params;
 
-    Recipes.findRecipesByChefId(id)
+    Chefs.getChefRecipes(id)
     .then(recipes => {
         if(recipes){
             res.json(recipes)
