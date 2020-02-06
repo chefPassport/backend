@@ -1,6 +1,8 @@
 const db = require('../database/dbConfig.js');
 const request = require('supertest');
 const server = require('../api/server');
+const Recipes = require('../recipes/recipes-model');
+const Chefs = require('./chefs-model');
 
 
 // ------------------- REGISTER ENDPOINT ---------------------- //
@@ -49,6 +51,7 @@ describe('Chefs Router', function() {
         });
     });
 })
+
 
 // ------------------- Specific Chef's Recipes ENDPOINT ---------------------- //
 
@@ -102,3 +105,31 @@ describe('Chefs Router', function(){
 
     })
 });
+
+// ------------------- DELETE ENDPOINT ---------------------- //
+describe('Recipes Model', function() {
+    beforeEach(async () => {
+        await db('recipes').truncate();
+    });
+
+    describe('remove()', function() {
+        it ('should remove a recipe', async function() {
+            await Recipes.addRecipe({ image: 'test url', recipe_title: 'test title', meal_type: 'test meal', ingredients: 'test ingredients', instructions: 'test instructions', chef_id: 1 });
+            await Chefs.remove(1);
+
+            const recipes = await db('recipes');
+            expect(recipes).toHaveLength(0);
+        });
+
+        it ('should not remove recipe that does not exist', async function() {
+            await Recipes.addRecipe({ image: 'test url1', recipe_title: 'test title1', meal_type: 'test meal1', ingredients: 'test ingredients1', instructions: 'test instructions1', chef_id: 1 });
+            await Recipes.addRecipe({ image: 'test url2', recipe_title: 'test title2', meal_type: 'test meal2', ingredients: 'test ingredients2', instructions: 'test instructions2', chef_id: 1 });
+            await Recipes.addRecipe({ image: 'test url3', recipe_title: 'test title3', meal_type: 'test meal3', ingredients: 'test ingredients3', instructions: 'test instructions3', chef_id: 1 });
+            await Chefs.remove(5);
+
+            const threeRecipes = await db('recipes');
+            expect(threeRecipes).toHaveLength(3);
+        });
+    });
+});
+
